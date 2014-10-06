@@ -5,7 +5,6 @@ Public Class Form1
     Private Sub btnCompute_Click(sender As Object, e As EventArgs) Handles btnCompute.Click
         Dim Ast, Bst, Cst, Dst As String
         Dim A, B, C, D As Double
-
         ' Read the input from the user
         Ast = txtA.Text
         Bst = txtB.Text
@@ -24,10 +23,27 @@ Public Class Form1
         B = CDbl(Bst)
         C = CDbl(Cst)
         D = CDbl(Dst)
+        If (B < A Or D < C) Then
+            MessageBox.Show("please enter valid numbers", "Error!")
+        End If
+      
+
+        txtResult.Text = FindIntersection(A, B, C, D)
+    End Sub
+    Function FindIntersection(A As Double, B As Double, C As Double, D As Double) As String
+
 
         ' Please write your code here...
-
-        txtResult.Text = "Not implemented yet"
-    End Sub
-
+        Dim result As String
+        If (B < C) Or (D < A) Then
+            result = "No intersection"
+        Else
+            Dim begpoint As Double
+            begpoint = Math.Max(A, C)
+            Dim endpoint As Double
+            endpoint = Math.Min(B, D)
+            result = "the intersection is from" & begpoint & "to" & endpoint
+        End If
+        Return result
+    End Function
 End Class
